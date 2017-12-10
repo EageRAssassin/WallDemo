@@ -154,7 +154,11 @@ public class MainWindow {
 				String st2;
 				try {
 					while ((st2 = br.readLine()) != null){
-						String convertedCode = codeBlock.get(st2) + "\n";
+						String convertedCode = codeBlock.get(st2);
+						if (convertedCode.equals("WHILE")){
+							convertedCode += " Destination";
+						}
+						convertedCode += "\n";
 						inputCode += convertedCode;
 					}
 				} catch (IOException e1) {
@@ -259,7 +263,7 @@ public class MainWindow {
 	private boolean parseLogic(String s) {
 		if (s.contains("Destination")) {
 			s.split("Destination");
-			return robotX == 3 && robotY == 3;
+			return robotX != 3 && robotY != 3;
 		} else if (s.contains(">")) {
 			String[] temp = s.split(">");
 			return parseValue(temp[0]) > parseValue(temp[1]);
